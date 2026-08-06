@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - FoodiVerse Online Food Ordering System</title>
+  <meta name="description" content="Learn about FoodiVerse - our story, our master chefs, organic farm-to-table ingredients, and our commitment to gourmet food delivery.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        Foodi<span>Verse</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="orders.html" class="nav-link">Orders</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="admin.html" class="nav-link" style="color:var(--primary-accent);"><i class="fa-solid fa-user-gear"></i> Admin</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Auth Buttons / User Profile -->
+        <div id="authNavBtns" style="display: flex; gap: 0.5rem;">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+        </div>
+        <div id="userProfileNav" style="display: none;"></div>
+
+        <!-- Cart Button -->
+        <button class="cart-btn-trigger" id="cartTriggerBtn" aria-label="Open Cart Drawer">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge">0</span>
+        </button>
+
+        <!-- Mobile Nav Toggle -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section style="background: linear-gradient(135deg, #09090b 0%, #18181b 100%); color: #ffffff; padding: 110px 0 45px; text-align: center;">
+    <div class="container">
+      <span style="color: var(--primary-accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px;">Our Heritage</span>
+      <h1 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-top: 0.25rem; color: #ffffff;">About FoodiVerse</h1>
+      <p style="color: #cbd5e1; max-width: 550px; margin: 0.5rem auto 0; font-size: 0.95rem;">Bringing gourmet restaurant quality dishes directly to your table with speed, passion, and uncompromising quality.</p>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="section">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;">
+      <div>
+        <span class="section-subtitle">Our Journey</span>
+        <h2 class="section-title" style="text-align: left; margin-bottom: 1.25rem;">Crafting Extraordinary Culinary Experiences Since 2018</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
+          FoodiVerse was born from a simple belief: ordering food online shouldn't mean compromising on freshness, taste, or presentation.
+        </p>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          We partner with certified local organic farms and master culinary chefs to prepare every meal from scratch upon order. From our 72-hour fermented sourdough artisan pizza to our sushi-grade Atlantic salmon, every detail is engineered for food lovers.
+        </p>
+        <div style="display: flex; gap: 1.5rem;">
+          <div style="border-left: 4px solid var(--primary); padding-left: 1rem;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">100% Organic</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Sourced daily from local partner farms</p>
+          </div>
+          <div style="border-left: 4px solid var(--accent); padding-left: 1rem;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">Zero Plastics</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Eco-friendly biodegradable packaging</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior" style="width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Chefs Section -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Culinary Masters</span>
+        <h2 class="section-title">Meet Our Executive Chefs</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); text-align: center; padding-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+          <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=800&q=80" alt="Chef Marco Rossi" style="width: 100%; height: 260px; object-fit: cover;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-top: 1.25rem;">Chef Marco Rossi</h3>
+          <p style="color: var(--primary-accent); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.5rem;">Head of Artisan Pizza</p>
+          <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0 1.25rem;">15+ years experience in Neapolitan sourdough pizza making and wood-fire baking.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); text-align: center; padding-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+          <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=800&q=80" alt="Chef Kenji Takahashi" style="width: 100%; height: 260px; object-fit: cover;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-top: 1.25rem;">Chef Kenji Takahashi</h3>
+          <p style="color: var(--primary-accent); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.5rem;">Master BBQ & Grills</p>
+          <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0 1.25rem;">Trained in charcoal grilling & smoking, specializing in honey-glazed pork ribs.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); text-align: center; padding-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+          <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Chef Antoine Laurent" style="width: 100%; height: 260px; object-fit: cover;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-top: 1.25rem;">Chef Antoine Laurent</h3>
+          <p style="color: var(--primary-accent); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.5rem;">Gourmet Burger Specialist</p>
+          <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0 1.25rem;">French culinary craft combined with American Black Angus beef grilling techniques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide-out Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Your Food Basket</h3>
+      <button class="close-cart-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="cart-items" id="cartItemsList"></div>
+
+    <div class="cart-footer">
+      <div class="cart-promo-box">
+        <input type="text" id="promoCodeInput" placeholder="Promo code (e.g. TASTY20)">
+        <button class="btn btn-secondary btn-sm" id="applyPromoBtn">Apply</button>
+      </div>
+
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Discount</span>
+        <span id="cartDiscount" style="color:var(--success);">-$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Delivery Fee</span>
+        <span id="cartDelivery">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Est. Tax (8%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Total Amount</span>
+        <span id="cartTotal" style="color:var(--primary);">$0.00</span>
+      </div>
+
+      <button class="btn btn-primary" id="checkoutBtn" style="width: 100%; margin-top: 1.25rem;">
+        Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Auth Modal -->
+  <div class="modal-overlay" id="authModalOverlay">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuthModalBtn"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" data-tab="login">Login</button>
+        <button class="auth-tab-btn" data-tab="signup">Sign Up</button>
+      </div>
+
+      <div id="loginSection">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" class="form-input" placeholder="user@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Login to Account</button>
+        </form>
+      </div>
+
+      <div id="signupSection" style="display: none;">
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="signupName">Full Name</label>
+            <input type="text" id="signupName" class="form-input" placeholder="Alex Morgan" required>
+          </div>
+          <div class="form-group">
+            <label for="signupEmail">Email Address</label>
+            <input type="email" id="signupEmail" class="form-input" placeholder="alex@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Summary Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card" style="max-width: 520px;">
+      <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Order Checkout</h3>
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label for="checkoutAddress">Delivery Address</label>
+          <input type="text" id="checkoutAddress" class="form-input" placeholder="123 Gourmet Ave, Apt 4B" required>
+        </div>
+        <div class="form-group">
+          <label for="checkoutPhone">Contact Phone</label>
+          <input type="tel" id="checkoutPhone" class="form-input" placeholder="+1 (555) 019-2834" required>
+        </div>
+        <div class="form-group">
+          <label>Payment Method</label>
+          <div style="display: flex; gap: 1rem; margin-top: 0.4rem;">
+            <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+              <input type="radio" name="paymentMethod" value="card" checked> Credit/Debit Card
+            </label>
+            <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+              <input type="radio" name="paymentMethod" value="cod"> Cash on Delivery
+            </label>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-alt); padding: 1rem; border-radius: var(--radius-md); margin: 1rem 0;">
+          <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:0.4rem;">
+            <span>Subtotal</span><span id="checkoutModalSubtotal">$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.1rem; color:var(--primary);">
+            <span>Total Payable</span><span id="checkoutModalTotal">$0.00</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" id="cancelCheckoutBtn" style="flex: 1;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1.5;">Confirm & Pay</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          Foodi<span>Verse</span>
+        </a>
+        <p class="footer-desc">
+          Crafting extraordinary food experiences delivered hot to your doorstep. Fresh farm ingredients, artisan recipes, and passionate chefs.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Full Food Menu</a>
+          <a href="orders.html">Track Active Order</a>
+          <a href="about.html">About Our Kitchen</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Top Categories</h4>
+        <div class="footer-links">
+          <a href="menu.html?cat=pizza">Artisan Pizza</a>
+          <a href="menu.html?cat=burgers">Gourmet Burgers</a>
+          <a href="menu.html?cat=japanese">Sushi & Asian</a>
+          <a href="menu.html?cat=bowls">Healthy Bowls</a>
+          <a href="menu.html?cat=desserts">Desserts & Drinks</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Opening Hours</h4>
+        <ul class="hours-list">
+          <li><span>Mon - Thu:</span> <span>10:00 AM - 10:30 PM</span></li>
+          <li><span>Fri - Sat:</span> <span>10:00 AM - 11:30 PM</span></li>
+          <li><span>Sunday:</span> <span>11:00 AM - 10:00 PM</span></li>
+        </ul>
+        <p style="font-size:0.85rem; color:#b0b8c1; margin-top:0.75rem;">
+          <i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> 124 Gourmet Boulevard, Food District
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 FoodiVerse Inc. All rights reserved.</p>
+      <div>
+        <a href="#" style="margin-right: 1.25rem;">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/order-tracker.js"></script>
+  <script src="js/main.js?v=1.2"></script>
+</body>
+</html>

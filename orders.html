@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Orders & Tracker - FoodiVerse</title>
+  <meta name="description" content="View and track your food orders, search by Order ID, check status badges (Preparing, Out for Delivery, Delivered), and reorder past meals.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=4.0">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        Foodi<span>Verse</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="orders.html" class="nav-link active">Orders</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="admin.html" class="nav-link" style="color:var(--primary-accent);"><i class="fa-solid fa-user-gear"></i> Admin</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Auth Buttons / User Profile -->
+        <div id="authNavBtns" style="display: flex; gap: 0.5rem;">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+        </div>
+        <div id="userProfileNav" style="display: none;"></div>
+
+        <!-- Cart Button -->
+        <a href="cart.html" class="cart-btn-trigger" id="cartTriggerBtn" aria-label="Open Cart Page">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge">0</span>
+        </a>
+
+        <!-- Mobile Nav Toggle -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section style="background: linear-gradient(135deg, #09090b 0%, #18181b 100%); color: #ffffff; padding: 110px 0 45px; text-align: center;">
+    <div class="container">
+      <span style="color: var(--primary-accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px;">Customer Portal</span>
+      <h1 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-top: 0.25rem; color: #ffffff;">My Food Orders</h1>
+      <p style="color: #cbd5e1; max-width: 550px; margin: 0.5rem auto 0; font-size: 0.95rem;">Track live order status, search by Order ID, and view complete order history stored in your browser.</p>
+    </div>
+  </section>
+
+  <!-- Orders Main Content -->
+  <section class="section">
+    <div class="container" style="max-width: 920px;">
+      
+      <!-- Active Order Tracker Stepper -->
+      <div id="activeOrderSection">
+        <!-- Rendered dynamically by order-tracker.js -->
+      </div>
+
+      <!-- Search & Past Orders History -->
+      <div style="margin-top: 3.5rem;">
+        
+        <!-- Header with Live Search Input -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.75rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800;">Previous Orders</h3>
+          
+          <!-- Search Bar -->
+          <div style="position: relative; width: 100%; max-width: 320px;">
+            <input type="text" id="orderSearchInput" class="form-input" placeholder="Search by Order ID (e.g. ORD-98421)..." style="padding-left: 2.5rem;">
+            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+          </div>
+        </div>
+
+        <!-- Orders Listing Container -->
+        <div id="orderHistorySection">
+          <!-- Rendered dynamically by order-tracker.js -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Slide-out Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Your Food Basket</h3>
+      <button class="close-cart-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="cart-items" id="cartItemsList"></div>
+
+    <div class="cart-footer">
+      <div class="cart-promo-box">
+        <input type="text" id="promoCodeInput" placeholder="Promo code (e.g. TASTY20)">
+        <button class="btn btn-secondary btn-sm" id="applyPromoBtn">Apply</button>
+      </div>
+
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Discount</span>
+        <span id="cartDiscount" style="color:var(--success);">-$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Delivery Fee</span>
+        <span id="cartDelivery">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Est. Tax (8%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Total Amount</span>
+        <span id="cartTotal" style="color:var(--primary);">$0.00</span>
+      </div>
+
+      <button class="btn btn-primary" id="checkoutBtn" style="width: 100%; margin-top: 1.25rem;">
+        Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          Foodi<span>Verse</span>
+        </a>
+        <p class="footer-desc">
+          Crafting extraordinary food experiences delivered hot to your doorstep. Fresh farm ingredients, artisan recipes, and passionate chefs.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Full Food Menu</a>
+          <a href="orders.html">Track Active Order</a>
+          <a href="about.html">About Our Kitchen</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Top Categories</h4>
+        <div class="footer-links">
+          <a href="menu.html?cat=pizza">Artisan Pizza</a>
+          <a href="menu.html?cat=burger">Gourmet Burgers</a>
+          <a href="menu.html?cat=pasta">Italian Pasta</a>
+          <a href="menu.html?cat=bbq">BBQ & Grills</a>
+          <a href="menu.html?cat=desserts">Desserts & Drinks</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Opening Hours</h4>
+        <ul class="hours-list">
+          <li><span>Mon - Thu:</span> <span>10:00 AM - 10:30 PM</span></li>
+          <li><span>Fri - Sat:</span> <span>10:00 AM - 11:30 PM</span></li>
+          <li><span>Sunday:</span> <span>11:00 AM - 10:00 PM</span></li>
+        </ul>
+        <p style="font-size:0.85rem; color:#b0b8c1; margin-top:0.75rem;">
+          <i class="fa-solid fa-location-dot" style="color:var(--primary-accent);"></i> 124 Gourmet Boulevard, Food District
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 FoodiVerse Inc. All rights reserved.</p>
+      <div>
+        <a href="#" style="margin-right: 1.25rem;">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/order-tracker.js"></script>
+  <script src="js/main.js?v=1.2"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - FoodiVerse Online Food Ordering System</title>
+  <meta name="description" content="View and manage items in your food shopping cart, apply promo codes, and proceed to checkout with fast delivery.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        Foodi<span>Verse</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="orders.html" class="nav-link">Orders</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="admin.html" class="nav-link" style="color:var(--primary-accent);"><i class="fa-solid fa-user-gear"></i> Admin</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Auth Buttons / User Profile -->
+        <div id="authNavBtns" style="display: flex; gap: 0.5rem;">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+        </div>
+        <div id="userProfileNav" style="display: none;"></div>
+
+        <!-- Cart Button -->
+        <a href="cart.html" class="cart-btn-trigger" id="cartTriggerBtn" aria-label="Open Cart Page">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge">0</span>
+        </a>
+
+        <!-- Mobile Nav Toggle -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section style="background: linear-gradient(135deg, #09090b 0%, #18181b 100%); color: #ffffff; padding: 110px 0 45px; text-align: center;">
+    <div class="container">
+      <span style="color: var(--primary-accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px;">Your Basket</span>
+      <h1 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-top: 0.25rem; color: #ffffff;">Shopping Cart</h1>
+      <p style="color: #cbd5e1; max-width: 550px; margin: 0.5rem auto 0; font-size: 0.95rem;">Review your selected gourmet dishes, apply promo codes, and complete your order.</p>
+    </div>
+  </section>
+
+  <!-- Cart Content Section -->
+  <section class="section">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 2rem; align-items: flex-start;">
+        
+        <!-- Cart Items Table / Cards -->
+        <div id="dedicatedCartItemsList">
+          <!-- Rendered dynamically by cart.js -->
+        </div>
+
+        <!-- Order Summary Card -->
+        <div id="dedicatedCartSummary" style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">Order Summary</h3>
+
+          <!-- Promo Code Box -->
+          <div class="cart-promo-box" style="margin-bottom: 1.25rem;">
+            <input type="text" id="pagePromoCodeInput" placeholder="Promo code (e.g. TASTY20)">
+            <button class="btn btn-secondary btn-sm" id="pageApplyPromoBtn">Apply</button>
+          </div>
+
+          <div class="cart-summary-row">
+            <span>Subtotal</span>
+            <span id="pageSubtotal">$0.00</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>Discount</span>
+            <span id="pageDiscount" style="color:var(--success);">-$0.00</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>Delivery Fee</span>
+            <span id="pageDelivery">$0.00</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>Est. Tax (8%)</span>
+            <span id="pageTax">$0.00</span>
+          </div>
+
+          <div class="cart-summary-row total">
+            <span>Grand Total</span>
+            <span id="pageTotal" style="color:var(--primary);">$0.00</span>
+          </div>
+
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.85rem 0 1.25rem; text-align: center;">
+            <i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i> Free delivery on orders over $35.00
+          </p>
+
+          <button class="btn btn-primary" id="pageCheckoutBtn" style="width: 100%;">
+            Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide-out Cart Drawer (fallback) -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Your Food Basket</h3>
+      <button class="close-cart-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="cart-items" id="cartItemsList"></div>
+
+    <div class="cart-footer">
+      <div class="cart-promo-box">
+        <input type="text" id="promoCodeInput" placeholder="Promo code (e.g. TASTY20)">
+        <button class="btn btn-secondary btn-sm" id="applyPromoBtn">Apply</button>
+      </div>
+
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Discount</span>
+        <span id="cartDiscount" style="color:var(--success);">-$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Delivery Fee</span>
+        <span id="cartDelivery">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Est. Tax (8%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Total Amount</span>
+        <span id="cartTotal" style="color:var(--primary);">$0.00</span>
+      </div>
+
+      <button class="btn btn-primary" id="checkoutBtn" style="width: 100%; margin-top: 1.25rem;">
+        Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Checkout Summary Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card" style="max-width: 520px;">
+      <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem;">Order Checkout</h3>
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label for="checkoutAddress">Delivery Address</label>
+          <input type="text" id="checkoutAddress" class="form-input" placeholder="123 Gourmet Ave, Apt 4B" required>
+        </div>
+        <div class="form-group">
+          <label for="checkoutPhone">Contact Phone</label>
+          <input type="tel" id="checkoutPhone" class="form-input" placeholder="+1 (555) 019-2834" required>
+        </div>
+        <div class="form-group">
+          <label>Payment Method</label>
+          <div style="display: flex; gap: 1rem; margin-top: 0.4rem;">
+            <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+              <input type="radio" name="paymentMethod" value="card" checked> Credit/Debit Card
+            </label>
+            <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+              <input type="radio" name="paymentMethod" value="cod"> Cash on Delivery
+            </label>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-alt); padding: 1rem; border-radius: var(--radius-md); margin: 1rem 0;">
+          <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:0.4rem;">
+            <span>Subtotal</span><span id="checkoutModalSubtotal">$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.1rem; color:var(--primary);">
+            <span>Total Payable</span><span id="checkoutModalTotal">$0.00</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" id="cancelCheckoutBtn" style="flex: 1;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1.5;">Confirm & Pay</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          Foodi<span>Verse</span>
+        </a>
+        <p class="footer-desc">
+          Crafting extraordinary food experiences delivered hot to your doorstep. Fresh farm ingredients, artisan recipes, and passionate chefs.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Full Food Menu</a>
+          <a href="orders.html">Track Active Order</a>
+          <a href="about.html">About Our Kitchen</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Top Categories</h4>
+        <div class="footer-links">
+          <a href="menu.html?cat=pizza">Artisan Pizza</a>
+          <a href="menu.html?cat=burger">Gourmet Burgers</a>
+          <a href="menu.html?cat=pasta">Italian Pasta</a>
+          <a href="menu.html?cat=bbq">BBQ & Grills</a>
+          <a href="menu.html?cat=desserts">Desserts & Drinks</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Opening Hours</h4>
+        <ul class="hours-list">
+          <li><span>Mon - Thu:</span> <span>10:00 AM - 10:30 PM</span></li>
+          <li><span>Fri - Sat:</span> <span>10:00 AM - 11:30 PM</span></li>
+          <li><span>Sunday:</span> <span>11:00 AM - 10:00 PM</span></li>
+        </ul>
+        <p style="font-size:0.85rem; color:#b0b8c1; margin-top:0.75rem;">
+          <i class="fa-solid fa-location-dot" style="color:var(--primary-accent);"></i> 124 Gourmet Boulevard, Food District
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 FoodiVerse Inc. All rights reserved.</p>
+      <div>
+        <a href="#" style="margin-right: 1.25rem;">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/order-tracker.js"></script>
+  <script src="js/main.js?v=1.2"></script>
+</body>
+</html>

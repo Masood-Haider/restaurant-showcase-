@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel Dashboard - FoodiVerse</title>
+  <meta name="description" content="FoodiVerse Admin Dashboard. Manage orders, track kitchen preparation, update delivery status, and view customer statistics.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+
+  <style>
+    /* Admin Panel Specific Styling */
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+      background: var(--bg-alt);
+    }
+
+    .admin-sidebar {
+      width: 250px;
+      background: #09090b;
+      color: #a1a1aa;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    .admin-sidebar .logo {
+      color: #ffffff;
+      margin-bottom: 2.25rem;
+      padding-left: 0.5rem;
+    }
+
+    .admin-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      color: #a1a1aa;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .admin-nav-item:hover, .admin-nav-item.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .admin-nav-item.active {
+      background: var(--primary-accent);
+      color: var(--primary);
+    }
+
+    .admin-main {
+      flex: 1;
+      margin-left: 250px;
+      padding: 2rem 2.5rem;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--primary);
+      color: var(--primary-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+    }
+
+    .stat-card-val {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .stat-card-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .table-container {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .admin-table th {
+      background: var(--bg-alt);
+      padding: 1rem 1.25rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      border-bottom: 1px solid var(--border-color);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 992px) {
+      .admin-sidebar { width: 70px; padding: 1.5rem 0.5rem; }
+      .admin-sidebar .logo span, .admin-nav-item span { display: none; }
+      .admin-main { margin-left: 70px; padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span>Foodi<strong>Verse</strong></span>
+      </a>
+
+      <nav class="admin-nav">
+        <a href="#" class="admin-nav-item active" data-view="dashboard">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="admin-nav-item" data-view="orders">
+          <i class="fa-solid fa-receipt"></i>
+          <span>Orders</span>
+        </a>
+        <a href="#" class="admin-nav-item" data-view="customers">
+          <i class="fa-solid fa-users"></i>
+          <span>Customers</span>
+        </a>
+        <a href="#" class="admin-nav-item" data-view="logout" style="margin-top: auto; color: #ef4444;">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      
+      <!-- Top Header -->
+      <div class="admin-header">
+        <div>
+          <h1 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--text-dark);">
+            Restaurant Admin Panel
+          </h1>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Live Order Operations & Kitchen Management</p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <a href="index.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-store"></i> View Storefront</a>
+          <div style="display: flex; align-items: center; gap: 0.6rem; background: var(--bg-main); padding: 0.4rem 0.85rem; border-radius: var(--radius-full); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: var(--primary-accent); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">
+              AD
+            </div>
+            <span style="font-weight: 700; font-size: 0.85rem;">Admin User</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 1: Dashboard View -->
+      <div class="admin-view" id="view-dashboard">
+        
+        <!-- Statistics Cards -->
+        <div class="admin-stats-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card-val" id="statTotalOrders">0</div>
+              <div class="stat-card-label">Total Orders</div>
+            </div>
+            <div class="stat-card-icon"><i class="fa-solid fa-box-archive"></i></div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-card-val" id="statPreparing" style="color: #d97706;">0</div>
+              <div class="stat-card-label">Preparing</div>
+            </div>
+            <div class="stat-card-icon" style="background:#fef3c7; color:#d97706;"><i class="fa-solid fa-fire-burner"></i></div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-card-val" id="statOutForDelivery" style="color: #2563eb;">0</div>
+              <div class="stat-card-label">Out for Delivery</div>
+            </div>
+            <div class="stat-card-icon" style="background:#dbeafe; color:#2563eb;"><i class="fa-solid fa-motorcycle"></i></div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-card-val" id="statDelivered" style="color: #16a34a;">0</div>
+              <div class="stat-card-label">Delivered</div>
+            </div>
+            <div class="stat-card-icon" style="background:#dcfce7; color:#16a34a;"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-card-val" id="statTotalRevenue">$0.00</div>
+              <div class="stat-card-label">Total Sales</div>
+            </div>
+            <div class="stat-card-icon" style="background:var(--primary); color:var(--primary-accent);"><i class="fa-solid fa-dollar-sign"></i></div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Table Section -->
+        <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 1.5rem; box-shadow: var(--shadow-sm); margin-bottom: 2rem;">
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800;">Recent Orders</h3>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <!-- Search Input -->
+              <input type="text" id="adminOrderSearch" class="form-input" placeholder="Search Order ID or Customer..." style="width: 240px; font-size: 0.82rem;">
+              
+              <!-- Filter Dropdown -->
+              <select id="adminOrderFilter" class="form-input" style="width: 160px; font-size: 0.82rem;">
+                <option value="all">All Statuses</option>
+                <option value="Preparing">Preparing</option>
+                <option value="Out for Delivery">Out for Delivery</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTableBody">
+                <!-- Injected dynamically by admin.js -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- VIEW 2: Orders Full View -->
+      <div class="admin-view" id="view-orders" style="display: none;">
+        <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 1.25rem;">Orders Management</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1.25rem;">Change live order status using the dropdown selector to update customer device tracking in real-time.</p>
+          
+          <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTableBodyFull">
+                <!-- Injected dynamically by admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 3: Customers View -->
+      <div class="admin-view" id="view-customers" style="display: none;">
+        <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 1.25rem;">Registered Customers</h3>
+          
+          <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Email Address</th>
+                  <th>Phone Number</th>
+                  <th>Registration Date</th>
+                </tr>
+              </thead>
+              <tbody id="adminCustomersTableBody">
+                <!-- Injected dynamically by admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/order-tracker.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/main.js?v=1.2"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Sync Full Table view
+      const fullBody = document.getElementById('adminOrdersTableBodyFull');
+      const mainBody = document.getElementById('adminOrdersTableBody');
+      if (fullBody && mainBody) {
+        const observer = new MutationObserver(() => {
+          fullBody.innerHTML = mainBody.innerHTML;
+        });
+        observer.observe(mainBody, { childList: true, subtree: true });
+        fullBody.innerHTML = mainBody.innerHTML;
+      }
+    });
+  </script>
+</body>
+</html>
