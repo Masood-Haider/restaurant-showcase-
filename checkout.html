@@ -68,15 +68,15 @@
   <!-- Checkout Main Content -->
   <section class="section">
     <div class="container">
-      <form id="checkoutPageForm" style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 2rem; align-items: flex-start;">
+      <form id="checkoutPageForm" class="checkout-grid">
         
         <!-- Left Column: Delivery Details & Payment Method -->
-        <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2rem; box-shadow: var(--shadow-sm);">
+        <div class="checkout-card">
           <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
             <i class="fa-solid fa-truck-fast" style="color: var(--primary-accent);"></i> Delivery Information
           </h3>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+          <div class="checkout-row-2col">
             <!-- Full Name -->
             <div class="form-group">
               <label for="checkoutPageName">Full Name *</label>

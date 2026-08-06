@@ -2032,5 +2032,52 @@ textarea.form-input {
   line-height: 1.5;
 }
 
+/* ==========================================================================
+   Checkout Page Responsive Layout Classes (checkout.html)
+   ========================================================================== */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.checkout-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.checkout-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .checkout-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .checkout-row-2col {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+
 
 
