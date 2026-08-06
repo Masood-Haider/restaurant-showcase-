@@ -57,17 +57,17 @@
   </header>
 
   <!-- Page Banner -->
-  <section style="background: linear-gradient(135deg, #09090b 0%, #18181b 100%); color: #ffffff; padding: 110px 0 45px; text-align: center;">
+  <section class="about-hero-banner">
     <div class="container">
       <span style="color: var(--primary-accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px;">Our Heritage</span>
-      <h1 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-top: 0.25rem; color: #ffffff;">About FoodiVerse</h1>
+      <h1 class="about-hero-title">About FoodiVerse</h1>
       <p style="color: #cbd5e1; max-width: 550px; margin: 0.5rem auto 0; font-size: 0.95rem;">Bringing gourmet restaurant quality dishes directly to your table with speed, passion, and uncompromising quality.</p>
     </div>
   </section>
 
   <!-- Story Section -->
   <section class="section">
-    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;">
+    <div class="container about-grid">
       <div>
         <span class="section-subtitle">Our Journey</span>
         <h2 class="section-title" style="text-align: left; margin-bottom: 1.25rem;">Crafting Extraordinary Culinary Experiences Since 2018</h2>
@@ -77,20 +77,24 @@
         <p style="color: var(--text-muted); margin-bottom: 2rem;">
           We partner with certified local organic farms and master culinary chefs to prepare every meal from scratch upon order. From our 72-hour fermented sourdough artisan pizza to our sushi-grade Atlantic salmon, every detail is engineered for food lovers.
         </p>
-        <div style="display: flex; gap: 1.5rem;">
-          <div style="border-left: 4px solid var(--primary); padding-left: 1rem;">
+        <div class="about-features">
+          <div class="about-feature-box">
             <h4 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">100% Organic</h4>
             <p style="font-size: 0.85rem; color: var(--text-muted);">Sourced daily from local partner farms</p>
           </div>
-          <div style="border-left: 4px solid var(--accent); padding-left: 1rem;">
+          <div class="about-feature-box accent">
             <h4 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">Zero Plastics</h4>
             <p style="font-size: 0.85rem; color: var(--text-muted);">Eco-friendly biodegradable packaging</p>
           </div>
         </div>
       </div>
 
-      <div>
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior" style="width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+      <div class="about-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior" class="about-img">
+        <div class="about-badge">
+          <i class="fa-solid fa-award"></i>
+          <span>Gourmet Excellence Award 2025</span>
+        </div>
       </div>
     </div>
   </section>
@@ -103,23 +107,23 @@
         <h2 class="section-title">Meet Our Executive Chefs</h2>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-        <div style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); text-align: center; padding-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
-          <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=800&q=80" alt="Chef Marco Rossi" style="width: 100%; height: 260px; object-fit: cover;">
+      <div class="chefs-grid">
+        <div class="chef-card">
+          <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=800&q=80" alt="Chef Marco Rossi" class="chef-img">
           <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-top: 1.25rem;">Chef Marco Rossi</h3>
           <p style="color: var(--primary-accent); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.5rem;">Head of Artisan Pizza</p>
           <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0 1.25rem;">15+ years experience in Neapolitan sourdough pizza making and wood-fire baking.</p>
         </div>
 
-        <div style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); text-align: center; padding-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
-          <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=800&q=80" alt="Chef Kenji Takahashi" style="width: 100%; height: 260px; object-fit: cover;">
+        <div class="chef-card">
+          <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=800&q=80" alt="Chef Kenji Takahashi" class="chef-img">
           <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-top: 1.25rem;">Chef Kenji Takahashi</h3>
           <p style="color: var(--primary-accent); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.5rem;">Master BBQ & Grills</p>
           <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0 1.25rem;">Trained in charcoal grilling & smoking, specializing in honey-glazed pork ribs.</p>
         </div>
 
-        <div style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); text-align: center; padding-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
-          <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Chef Antoine Laurent" style="width: 100%; height: 260px; object-fit: cover;">
+        <div class="chef-card">
+          <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Chef Antoine Laurent" class="chef-img">
           <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-top: 1.25rem;">Chef Antoine Laurent</h3>
           <p style="color: var(--primary-accent); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.5rem;">Gourmet Burger Specialist</p>
           <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0 1.25rem;">French culinary craft combined with American Black Angus beef grilling techniques.</p>
